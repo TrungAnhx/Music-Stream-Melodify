@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blueDark"
+    android:padding="16dp">
+
+    <!-- Ảnh Playlist nằm ở trên cùng -->
+    <ImageView
+        android:id="@+id/playlistImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/playlist_image"
+        android:contentDescription="Playlist Image"
+        android:layout_marginTop="40dp" />
+
+    <!-- Tên Playlist -->
+    <TextView
+        android:id="@+id/playlistName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/playlistImage"
+        android:layout_centerHorizontal="true"
+        android:text="Pop Playlist"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp" />
+
+    <!-- Danh sách bài hát (sử dụng RecyclerView hoặc LinearLayout) -->
+    <LinearLayout
+        android:id="@+id/songListLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/playlistName"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp">
+
+        <!-- Mỗi bài hát có ảnh và tên bài hát -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp">
+
+            <!-- Ảnh bài hát -->
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/song_image1"
+                android:contentDescription="Song Image" />
+
+            <!-- Tên bài hát -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Song Title 1"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp" />
+        </LinearLayout>
+
+        <!-- Bài hát tiếp theo -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/song_image2"
+                android:contentDescription="Song Image" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Song Title 2"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp" />
+        </LinearLayout>
+
+        <!-- Thêm các bài hát khác tương tự -->
+    </LinearLayout>
+</RelativeLayout>

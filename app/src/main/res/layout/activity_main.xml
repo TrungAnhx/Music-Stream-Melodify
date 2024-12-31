@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blueDark"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <!-- Toolbar section -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/logo"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:id="@+id/welcome_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome Back"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:layout_centerInParent="true"/>
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/icon_menu"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <!-- Categories and Playlists Section -->
+    <LinearLayout
+        android:id="@+id/categoriesLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp">
+
+        <!-- Category 1: Pop Songs -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/popCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pop Songs"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="start"/>
+
+            <!-- Horizontal ScrollView for Playlists under Pop Songs -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:spacing="16dp">
+
+                    <!-- Playlist item 1 -->
+                    <ImageView
+                        android:id="@+id/popPlaylist1"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/playlist_image1"
+                        android:contentDescription="Pop Playlist 1"
+                        android:layout_marginEnd="16dp"
+                        android:onClick="onPlaylistClick"/>
+
+                    <!-- Playlist item 2 -->
+                    <ImageView
+                        android:id="@+id/popPlaylist2"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/playlist_image2"
+                        android:contentDescription="Pop Playlist 2"
+                        android:layout_marginEnd="16dp"
+                        android:onClick="onPlaylistClick"/>
+
+                    <!-- Playlist item 3 -->
+                    <ImageView
+                        android:id="@+id/popPlaylist3"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/playlist_image3"
+                        android:contentDescription="Pop Playlist 3"
+                        android:layout_marginEnd="16dp"
+                        android:onClick="onPlaylistClick"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <!-- Category 2: Rap -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/rapCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rap"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="start"/>
+
+            <!-- Horizontal ScrollView for Playlists under Rap -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:spacing="16dp">
+
+                    <!-- Playlist item 1 -->
+                    <ImageView
+                        android:id="@+id/rapPlaylist1"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/playlist_image4"
+                        android:contentDescription="Rap Playlist 1"
+                        android:layout_marginEnd="16dp"
+                        android:onClick="onPlaylistClick"/>
+
+                    <!-- Playlist item 2 -->
+                    <ImageView
+                        android:id="@+id/rapPlaylist2"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/playlist_image5"
+                        android:contentDescription="Rap Playlist 2"
+                        android:layout_marginEnd="16dp"
+                        android:onClick="onPlaylistClick"/>
+
+                    <!-- Playlist item 3 -->
+                    <ImageView
+                        android:id="@+id/rapPlaylist3"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/playlist_image6"
+                        android:contentDescription="Rap Playlist 3"
+                        android:layout_marginEnd="16dp"
+                        android:onClick="onPlaylistClick"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <!-- Add more categories and playlists as needed -->
+    </LinearLayout>
+
+    <!-- RecyclerView for songs or other content -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/categoriesLayout"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"/>
+</RelativeLayout>
