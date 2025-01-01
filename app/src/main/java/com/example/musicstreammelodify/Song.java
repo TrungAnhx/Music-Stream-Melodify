@@ -1,27 +1,68 @@
 package com.example.musicstreammelodify;
 
-public class Song {
-    private int id;
-    private String title;
-    private String artist;
-    private String album;
-    private String coverImagePath;
-    private String filePath;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    public Song(int id, String title, String artist, String album, String coverImagePath, String filePath) {
-        this.id = id;
-        this.title = title;
+public class Song implements Parcelable {
+    private String name;
+    private String artist;
+    private int imageRes;
+    private int audioRes;
+
+    public Song(String name, String artist, int imageRes, int audioRes) {
+        this.name = name;
         this.artist = artist;
-        this.album = album;
-        this.coverImagePath = coverImagePath;
-        this.filePath = filePath;
+        this.imageRes = imageRes;
+        this.audioRes = audioRes;
     }
 
-    // Getters và Setters
-    public int getId() { return id; }
-    public String getTitle() { return title; }
-    public String getArtist() { return artist; }
-    public String getAlbum() { return album; }
-    public String getCoverImagePath() { return coverImagePath; }
-    public String getFilePath() { return filePath; }
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public int getImageRes() {
+        return imageRes;
+    }
+
+    public int getAudioRes() {
+        return audioRes;
+    }
+
+    // Parcelable implementation
+    protected Song(Parcel in) {
+        name = in.readString();
+        artist = in.readString();
+        imageRes = in.readInt();
+        audioRes = in.readInt();
+    }
+
+    public static final Creator<Song> CREATOR = new Creator<Song>() {
+        @Override
+        public Song createFromParcel(Parcel in) {
+            return new Song(in);
+        }
+
+        @Override
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(artist);
+        dest.writeInt(imageRes);
+        dest.writeInt(audioRes);
+    }
 }

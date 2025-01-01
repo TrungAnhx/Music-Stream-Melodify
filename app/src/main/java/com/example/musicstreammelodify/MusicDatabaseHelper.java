@@ -5,13 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class MusicDatabaseHelper extends SQLiteOpenHelper {
 
-    // Tên và phiên bản của cơ sở dữ liệu
     private static final String DATABASE_NAME = "music.db";
     private static final int DATABASE_VERSION = 1;
 
@@ -21,76 +18,68 @@ public class MusicDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Tạo bảng lưu bài hát
-        db.execSQL("CREATE TABLE songs (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "title TEXT NOT NULL, " +
-                "artist TEXT NOT NULL, " +
-                "album TEXT, " +
-                "cover_image_path TEXT, " +
-                "file_path TEXT NOT NULL)");
-
-        // Tạo bảng lưu playlist
-        db.execSQL("CREATE TABLE playlists (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "name TEXT NOT NULL)");
-
-        // Tạo bảng liên kết bài hát và playlist
-        db.execSQL("CREATE TABLE playlist_songs (" +
-                "playlist_id INTEGER NOT NULL, " +
-                "song_id INTEGER NOT NULL, " +
-                "FOREIGN KEY (playlist_id) REFERENCES playlists(id), " +
-                "FOREIGN KEY (song_id) REFERENCES songs(id))");
+        db.execSQL("CREATE TABLE songs (id INTEGER PRIMARY KEY, title TEXT, artist TEXT, album TEXT, cover_image_path TEXT, file_path TEXT)");
+        db.execSQL("CREATE TABLE playlists (id INTEGER PRIMARY KEY, name TEXT)");
+        db.execSQL("CREATE TABLE playlist_songs (playlist_id INTEGER, song_id INTEGER, FOREIGN KEY (playlist_id) REFERENCES playlists(id), FOREIGN KEY (song_id) REFERENCES songs(id))");
+        db.execSQL("CREATE TABLE users (id INTEGER PRIMARY KEY, email TEXT, password TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Xóa bảng cũ nếu nâng cấp
         db.execSQL("DROP TABLE IF EXISTS songs");
         db.execSQL("DROP TABLE IF EXISTS playlists");
         db.execSQL("DROP TABLE IF EXISTS playlist_songs");
         onCreate(db);
     }
 
-    // Hàm thêm bài hát
     public void addSong(String title, String artist, String album, String coverImagePath, String filePath) {
         SQLiteDatabase db = getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put("title", title);
         values.put("artist", artist);
         values.put("album", album);
         values.put("cover_image_path", coverImagePath);
         values.put("file_path", filePath);
-
         db.insert("songs", null, values);
         db.close();
     }
 
-    public List<Song> getAllSongs() {
-        List<Song> songs = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
+    // Thêm người dùng vào cơ sở dữ liệu
+    public void addUser(String email, String password) {
+        SQLiteDatabase db = getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM songs", null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Song song = new Song(
-                        cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("title")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("artist")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("album")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("cover_image_path")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("file_path"))
-                );
-                songs.add(song);
-            } while (cursor.moveToNext());
+        // Kiểm tra xem email đã tồn tại chưa
+        if (!checkEmailExists(email)) {
+            ContentValues values = new ContentValues();
+            values.put("email", email);
+            values.put("password", password);
+            db.insert("users", null, values);
         }
-        cursor.close();
-        db.close();
 
-        return songs;
+        db.close();
     }
 
+    // Kiểm tra thông tin đăng nhập
+    public boolean checkUserCredentials(String email, String password) {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM users WHERE email = ? AND password = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{email, password});
 
+        boolean isValid = cursor.getCount() > 0;
+        cursor.close();
+        db.close();
+        return isValid;
+    }
+
+    // Kiểm tra xem email đã tồn tại trong cơ sở dữ liệu chưa
+    public boolean checkEmailExists(String email) {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM users WHERE email = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{email});
+
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        db.close();
+        return exists;
+    }
 }

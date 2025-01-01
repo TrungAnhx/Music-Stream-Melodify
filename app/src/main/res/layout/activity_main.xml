@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blueDark"
+    android:background="@color/gray"
     android:padding="16dp"
     tools:context=".MainActivity">
 
@@ -16,8 +16,8 @@
         android:id="@+id/toolbar">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:src="@drawable/logo"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"/>
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="Welcome Back"
             android:textColor="@color/white"
-            android:textSize="28sp"
+            android:textSize="24sp"
             android:layout_centerInParent="true"/>
 
         <ImageView
@@ -76,32 +76,30 @@
                     android:orientation="horizontal"
                     android:spacing="16dp">
 
-                    <!-- Playlist item 1 -->
+                    <!-- Playlist items for Pop -->
                     <ImageView
                         android:id="@+id/popPlaylist1"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/playlist_pop"
+                        android:src="@drawable/billie"
                         android:contentDescription="Pop Playlist 1"
                         android:layout_marginEnd="16dp"
                         android:onClick="onPlaylistClick"/>
 
-                    <!-- Playlist item 2 -->
                     <ImageView
                         android:id="@+id/popPlaylist2"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/playlist_rap"
+                        android:src="@drawable/playlist_pop"
                         android:contentDescription="Pop Playlist 2"
                         android:layout_marginEnd="16dp"
                         android:onClick="onPlaylistClick"/>
 
-                    <!-- Playlist item 3 -->
                     <ImageView
                         android:id="@+id/popPlaylist3"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/billie"
+                        android:src="@drawable/pop7"
                         android:contentDescription="Pop Playlist 3"
                         android:layout_marginEnd="16dp"
                         android:onClick="onPlaylistClick"/>
@@ -110,7 +108,7 @@
                         android:id="@+id/popPlaylist4"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/pop6"
+                        android:src="@drawable/pop1"
                         android:contentDescription="Pop Playlist 4"
                         android:layout_marginEnd="16dp"
                         android:onClick="onPlaylistClick"/>
@@ -146,7 +144,7 @@
                     android:orientation="horizontal"
                     android:spacing="16dp">
 
-                    <!-- Playlist item 1 -->
+                    <!-- Playlist items for Rap -->
                     <ImageView
                         android:id="@+id/rapPlaylist1"
                         android:layout_width="100dp"
@@ -156,7 +154,6 @@
                         android:layout_marginEnd="16dp"
                         android:onClick="onPlaylistClick"/>
 
-                    <!-- Playlist item 2 -->
                     <ImageView
                         android:id="@+id/rapPlaylist2"
                         android:layout_width="100dp"
@@ -166,7 +163,6 @@
                         android:layout_marginEnd="16dp"
                         android:onClick="onPlaylistClick"/>
 
-                    <!-- Playlist item 3 -->
                     <ImageView
                         android:id="@+id/rapPlaylist3"
                         android:layout_width="100dp"
@@ -188,7 +184,7 @@
             </HorizontalScrollView>
         </LinearLayout>
 
-        <!-- Category 3: New music -->
+        <!-- Category 3: New Music -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -196,7 +192,7 @@
             android:paddingBottom="16dp">
 
             <TextView
-                android:id="@+id/NewMusic"
+                android:id="@+id/newMusicCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Music"
@@ -205,7 +201,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_gravity="start"/>
 
-            <!-- Horizontal ScrollView for Playlists under Rap -->
+            <!-- Horizontal ScrollView for Playlists under New Music -->
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -216,114 +212,48 @@
                     android:orientation="horizontal"
                     android:spacing="16dp">
 
-                    <!-- Playlist item 1 -->
+                    <!-- Playlist items for New Music -->
                     <ImageView
-                        android:id="@+id/Playlist1"
+                        android:id="@+id/newMusicPlaylist1"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/pop1"
-                        android:contentDescription="Playlist 1"
-                        android:layout_marginEnd="16dp"
-                        android:onClick="onPlaylistClick"/>
-
-                    <!-- Playlist item 2 -->
-                    <ImageView
-                        android:id="@+id/Playlist2"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/pop2"
-                        android:contentDescription="Playlist 2"
-                        android:layout_marginEnd="16dp"
-                        android:onClick="onPlaylistClick"/>
-
-                    <!-- Playlist item 3 -->
-                    <ImageView
-                        android:id="@+id/Playlist3"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/pop3"
-                        android:contentDescription="Playlist 3"
+                        android:src="@drawable/pop5"
+                        android:contentDescription="New Music Playlist 1"
                         android:layout_marginEnd="16dp"
                         android:onClick="onPlaylistClick"/>
 
                     <ImageView
-                        android:id="@+id/Playlist4"
+                        android:id="@+id/newMusicPlaylist2"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/pop4"
-                        android:contentDescription="Playlist 4"
-                        android:layout_marginEnd="16dp"
-                        android:onClick="onPlaylistClick"/>
-                </LinearLayout>
-            </HorizontalScrollView>
-        </LinearLayout>
-
-        <!-- Category 3: New music -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="16dp">
-
-            <!-- Horizontal ScrollView for Playlists under Rap -->
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:spacing="16dp">
-
-                    <!-- Playlist item 1 -->
-                    <ImageView
-                        android:id="@+id/Playlist5"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/rap4"
-                        android:contentDescription="Playlist 5"
-                        android:layout_marginEnd="16dp"
-                        android:onClick="onPlaylistClick"/>
-
-                    <!-- Playlist item 2 -->
-                    <ImageView
-                        android:id="@+id/Playlist6"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/rap5"
-                        android:contentDescription="Playlist 6"
-                        android:layout_marginEnd="16dp"
-                        android:onClick="onPlaylistClick"/>
-
-                    <!-- Playlist item 3 -->
-                    <ImageView
-                        android:id="@+id/Playlist7"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/rap6"
-                        android:contentDescription="Playlist 7"
+                        android:src="@drawable/rap7"
+                        android:contentDescription="New Music Playlist 2"
                         android:layout_marginEnd="16dp"
                         android:onClick="onPlaylistClick"/>
 
                     <ImageView
-                        android:id="@+id/Playlist8"
+                        android:id="@+id/newMusicPlaylist3"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/rap9"
-                        android:contentDescription="Playlist 8"
+                        android:src="@drawable/rap8"
+                        android:contentDescription="New Music Playlist 3"
+                        android:layout_marginEnd="16dp"
+                        android:onClick="onPlaylistClick"/>
+
+                    <ImageView
+                        android:id="@+id/newMusicPlaylist4"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/pop8"
+                        android:contentDescription="New Music Playlist 4"
                         android:layout_marginEnd="16dp"
                         android:onClick="onPlaylistClick"/>
                 </LinearLayout>
+
             </HorizontalScrollView>
+
         </LinearLayout>
-
-        <!-- Add more categories and playlists as needed -->
     </LinearLayout>
-        <!-- Add more categories and playlists as needed -->
-    </LinearLayout>
-
-
 
     <!-- RecyclerView for songs or other content -->
     <androidx.recyclerview.widget.RecyclerView
@@ -333,4 +263,5 @@
         android:layout_below="@id/categoriesLayout"
         android:layout_marginTop="16dp"
         android:layout_weight="1"/>
+
 </RelativeLayout>
