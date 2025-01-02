@@ -45,19 +45,17 @@ public class MusicDatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Thêm người dùng vào cơ sở dữ liệu
-    public void addUser(String email, String password) {
+    public boolean addUser(String email, String password) {
         SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("email", email);
+        values.put("password", password);
 
-        // Kiểm tra xem email đã tồn tại chưa
-        if (!checkEmailExists(email)) {
-            ContentValues values = new ContentValues();
-            values.put("email", email);
-            values.put("password", password);
-            db.insert("users", null, values);
-        }
-
+        long result = db.insert("users", null, values); // Trả về -1 nếu thất bại
         db.close();
+        return result != -1;
     }
+
 
     // Kiểm tra thông tin đăng nhập
     public boolean checkUserCredentials(String email, String password) {

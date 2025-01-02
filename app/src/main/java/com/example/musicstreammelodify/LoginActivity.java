@@ -1,7 +1,6 @@
 package com.example.musicstreammelodify;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,16 +22,22 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
+        // Khởi tạo database helper
         dbHelper = new MusicDatabaseHelper(this);
 
+        // Ánh xạ các View
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
         registerText = findViewById(R.id.registerText);
 
-        // Đăng ký tài khoản mới
-        registerText.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
+        // Xử lý chuyển đến màn hình đăng ký
+        registerText.setOnClickListener(v -> {
+            Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(registerIntent);
+        });
 
+        // Xử lý đăng nhập
         loginButton.setOnClickListener(v -> loginUser());
     }
 
@@ -40,29 +45,23 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
-        // Kiểm tra nếu các trường nhập liệu trống
+        // Kiểm tra trường nhập liệu
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(LoginActivity.this, "Please enter both email and password.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Kiểm tra thông tin đăng nhập
-        boolean isValidUser = dbHelper.checkUserCredentials(email, password);
-        if (isValidUser) {
+        boolean isValid = dbHelper.checkUserCredentials(email, password);
+        if (isValid) {
             Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
 
-            // Lưu trạng thái đăng nhập vào SharedPreferences (để nhận diện khi mở lại ứng dụng)
-            SharedPreferences prefs = getSharedPreferences("user_data", MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("is_logged_in", true);
-            editor.apply();
-
-            // Chuyển sang màn hình PlaylistActivity sau khi đăng nhập thành công
-            Intent intent = new Intent(LoginActivity.this, PlaylistActivity.class);
-            startActivity(intent);
-            finish();
+            // Chuyển sang MainActivity
+            Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(mainIntent);
+            finish(); // Kết thúc LoginActivity để không quay lại
         } else {
-            Toast.makeText(LoginActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Invalid email or password!", Toast.LENGTH_SHORT).show();
         }
     }
 }

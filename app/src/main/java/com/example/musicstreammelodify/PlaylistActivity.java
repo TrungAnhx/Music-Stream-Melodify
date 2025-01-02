@@ -56,6 +56,7 @@ public class PlaylistActivity extends AppCompatActivity {
         songRecyclerView.setAdapter(new SongAdapter(this, songs));
     }
 
+
     @Override
     protected void onPause() {
         super.onPause();
